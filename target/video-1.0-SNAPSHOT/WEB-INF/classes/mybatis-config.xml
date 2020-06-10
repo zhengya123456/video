@@ -23,10 +23,10 @@
              UsersMapper.xml  中包含各种SQl语句
              如果想要执行SQl语句 ，通过映射接口UsersMapper：跟UsersMapper.xml 关联 ，接口名要求必须跟xml文件名一致-->
         <mapper resource="mappers/UsersMapper.xml"/>
-        <mapper resource="mappers/CartMapper.xml"/>
-        <mapper resource="mappers/ProductMapper.xml"/>
-        <mapper resource="mappers/CartproMapper.xml"/>
-        <mapper resource="mappers/NewProductMapper.xml"/>
-        <mapper resource="mappers/MembersMapper.xml"/>
+<!--        <mapper resource="mappers/CartMapper.xml"/>-->
+<!--        <mapper resource="mappers/ProductMapper.xml"/>-->
+<!--        <mapper resource="mappers/CartproMapper.xml"/>-->
+<!--        <mapper resource="mappers/NewProductMapper.xml"/>-->
+<!--        <mapper resource="mappers/MembersMapper.xml"/>-->
     </mappers>
 </configuration>

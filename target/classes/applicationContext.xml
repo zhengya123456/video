@@ -47,11 +47,39 @@
     </bean>
 
 <!--视图解析-->
-<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-<!--    jsti标签库-->
-    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
-    <property name="prefix" value="/"></property>
-    <property name="suffix" value=".jsp"></property>
-</bean>
+<!--<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">-->
+<!--&lt;!&ndash;    jsti标签库&ndash;&gt;-->
+<!--    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>-->
+<!--    <property name="prefix" value="/"></property>-->
+<!--    <property name="suffix" value=".jsp"></property>-->
+<!--</bean>-->
 
+<!--    配置freeMarker视图解析器-->
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+        <property name="contentType" value="text/html;charset=utf-8"></property>
+        <property name="cache" value="false"></property>
+        <property name="suffix" value=".ftl"></property>
+        <property name="order" value="0"></property>
+        <property name="requestContextAttribute" value="request"></property>
+    </bean>
+
+<!--    freemarker的配置-->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/"></property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">5</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="locale">UTF-8</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH-mm-ss</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="number_format">0.####</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="whitespace_stripping">true</prop>
+                <prop key="tag_syntax">auto_detect</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
