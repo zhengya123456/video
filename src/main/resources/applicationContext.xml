@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+<!--    <bean id="mp" class="com.spring.entity.MobilePhone">-->
+<!--    </bean>-->
+
+<!--    配置文件转到MobilePhone类       包扫描标签-base-package-->
+<!--    扫描多个  用逗号隔-->
+<!--    <context:component-scan base-package="com.spring.entity,com.spring.test"></context:component-scan>-->
+<!--    <context:component-scan base-package="com.spring.entity"></context:component-scan>-->
+
+<!--    添加mvc分层后   spring扫描的包是service包和dao   dao后边在mapping中会扫描-->
+    <context:component-scan base-package="com.ssm"></context:component-scan>
+
+<!--mybatis配置文件中添加配置environments数据源和mappers映射配置文件
+     在spring配置文件整合    加载mybatis配置文件-->
+<!--    SqlSessionFactory配置-->
+<!--    通过bean标签体现-->
+
+<!--    添加db.properties文件-->
+    <bean id="db" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"></property>
+    </bean>
+<!--    spring中整合  spring的jdbc模块-->
+    <bean  id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!--        属性注入-->
+        <property name="driverClassName" value="${db.driver}"></property>
+        <property name="url" value="${db.url}"></property>
+        <property name="username" value="${db.username}"></property>
+        <property name="password" value="${db.password}"></property>
+     </bean>
+<!--mappers映射配置文件-->
+    <bean id="mapping" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ssm.mapping"></property>
+    </bean>
+<!--添加sqlSessionFactroy配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<!--数据源    连接数据库-->
+        <property name="dataSource" ref="dataSource"></property>
+<!-- mappers   -->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+<!--  mybatis-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    </bean>
+
+<!--视图解析-->
+<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+<!--    jsti标签库-->
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+    <property name="prefix" value="/"></property>
+    <property name="suffix" value=".jsp"></property>
+</bean>
+
+</beans>

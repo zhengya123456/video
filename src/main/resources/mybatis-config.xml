@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="db.properties"></properties>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- xml映射文件名有要求，XXXMapper,xxx表示实体类（表一一对应）
+          users表  Users类   UsersMapper.xml
+             UsersMapper.xml  中包含各种SQl语句
+             如果想要执行SQl语句 ，通过映射接口UsersMapper：跟UsersMapper.xml 关联 ，接口名要求必须跟xml文件名一致-->
+        <mapper resource="mappers/UsersMapper.xml"/>
+<!--        <mapper resource="mappers/CartMapper.xml"/>-->
+<!--        <mapper resource="mappers/ProductMapper.xml"/>-->
+<!--        <mapper resource="mappers/CartproMapper.xml"/>-->
+<!--        <mapper resource="mappers/NewProductMapper.xml"/>-->
+<!--        <mapper resource="mappers/MembersMapper.xml"/>-->
+    </mappers>
+</configuration>
